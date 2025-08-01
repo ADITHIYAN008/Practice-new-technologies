@@ -1,4 +1,5 @@
 import { HapticTab } from "@/components/HapticTab";
+import SpecialTabButton from "@/components/SpecialTabButton";
 import BlurTabBarBackground from "@/components/TabBarBackground";
 
 import { Ionicons } from "@expo/vector-icons";
@@ -17,8 +18,7 @@ export default function RootLayout() {
         },
         tabBarButton: HapticTab,
         tabBarBackground: BlurTabBarBackground,
-
-        tabBarPosition: "left",
+        animation: "fade",
       }}
     >
       <Tabs.Screen
@@ -33,6 +33,19 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
+        name="custom"
+        options={{
+          title: "Custom",
+          tabBarButton: SpecialTabButton,
+        }}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            console.log("Test");
+          },
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
@@ -42,6 +55,7 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="hidden" options={{ href: null }} />
     </Tabs>
   );
 }
